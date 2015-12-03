@@ -61,6 +61,10 @@ func (c *Conn) Connect() error {
 	}
 
 	conn, err := net.Dial("tcp", c.gateway)
+
+	tcpconn := conn.(*net.TCPConn)
+	tcpconn.SetKeepAlive(true)
+
 	if err != nil {
 		return err
 	}
